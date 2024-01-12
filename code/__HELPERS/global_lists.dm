@@ -140,6 +140,18 @@ var/global/list/unworn_slots = list(slot_l_hand,slot_r_hand, slot_l_store, slot_
 //Names that shouldn't trigger notifications about low health
 GLOBAL_LIST_EMPTY(ignore_health_alerts_from)
 
+//EQUINOX EDIT START - furry
+
+GLOBAL_LIST_EMPTY(ear_styles_list)	// Stores /datum/sprite_accessory/ears indexed by type
+GLOBAL_LIST_EMPTY(tail_styles_list)	// Stores /datum/sprite_accessory/tail indexed by type
+GLOBAL_LIST_EMPTY(wing_styles_list)	// Stores /datum/sprite_accessory/wing indexed by type
+
+//GLOBAL_LIST_EMPTY(custom_species_bases) // Species that can be used for a Custom Species icon base
+
+GLOBAL_LIST_EMPTY(body_marking_styles_list)
+
+//EQUINOX EDIT END - furry
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -160,6 +172,43 @@ GLOBAL_LIST_EMPTY(ignore_health_alerts_from)
 		var/datum/sprite_accessory/facial_hair/H = new path()
 		GLOB.facial_hair_styles_list[H.name] = H
 
+//EQUINOX EDIT START - furry
+
+	// Custom Ears
+	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	for(var/path in paths)
+		var/datum/sprite_accessory/ears/instance = new path()
+		GLOB.ear_styles_list[path] = instance
+
+	// Custom Tails
+	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail - /datum/sprite_accessory/tail/taur
+	for(var/path in paths)
+		var/datum/sprite_accessory/tail/instance = new path()
+		GLOB.tail_styles_list[path] = instance
+
+	// Custom Wings
+	paths = typesof(/datum/sprite_accessory/wing) - /datum/sprite_accessory/wing
+	for(var/path in paths)
+		var/datum/sprite_accessory/wing/instance = new path()
+		GLOB.wing_styles_list[path] = instance
+
+	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
+	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
+	for(var/path in paths)
+		var/datum/sprite_accessory/marking/M = new path()
+		GLOB.body_marking_styles_list[M.name] = M
+/*
+	// Custom species icon bases
+	var/list/blacklisted_icons = list(SPECIES_CUSTOM) //Not meant to have a unique icon
+	for(var/species_name in playable_species)
+		if(species_name in blacklisted_icons)
+			continue
+		var/datum/species/S = all_species[species_name]
+		if(S.spawn_flags)
+			continue
+		custom_species_bases += species_name
+*/
+//EQUINOX EDIT END - furry
 
 	//Surgery Steps - Initialize all /datum/surgery_step into a list
 	paths = subtypesof(/datum/surgery_step)

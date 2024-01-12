@@ -32,3 +32,10 @@
 		return TRUE
 	return FALSE
 
+//EQUINOX EDIT START - furry
+/image/proc/add_overlay(x)
+	overlays += x
+
+/image/proc/cut_overlay(x)
+	overlays -= x
+//EQUINOX EDIT END - furry

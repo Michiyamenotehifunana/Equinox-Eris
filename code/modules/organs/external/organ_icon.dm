@@ -50,9 +50,17 @@ var/global/list/limb_icon_cache = list()
 	part_key += skin_col
 	part_key += model
 
+
+
 	if(!appearance_test.special_update)
 		for(var/obj/item/organ/internal/eyes/I in internal_organs)
 			part_key += I.get_cache_key()
+
+	// EQUINOX EDIT START - furry - integrates bodymarkings into the icon caching system
+	for(var/M in markings)
+		part_key += "[M][markings[M]["color"]]"
+	// EQUINOX EDIT END /////
+
 	return part_key
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
@@ -100,7 +108,26 @@ var/global/list/limb_icon_cache = list()
 				var/icon/hair = new/icon(hair_style.icon, hair_style.icon_state)
 				if(hair_style.do_colouration)
 					hair.Blend(hair_col, ICON_ADD)
+					// EQUINOX EDIT START - Hair Color Gradients
+					for(var/M in markings)
+						var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+						if(mark_style.draw_target == 1)
+							var/icon/mark_s = new/icon(mark_style.icon, mark_style.icon_state)
+							mark_s.Blend(hair, ICON_AND)
+							mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
+							hair.Blend(mark_s, ICON_OVERLAY)
+					// EQUINOX EDIT END - Hair Color Gradients
 				overlays |= hair
+
+	// EQUINOX EDIT START - furry
+	for(var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		if(!mark_style.draw_target)
+			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+			mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
+			add_overlay(mark_s) //So when it's not on your body, it has icons
+			mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
+	// EQUINOX EDIT END /////
 
 	return mob_icon
 
@@ -108,13 +135,25 @@ var/global/list/limb_icon_cache = list()
 	var/gender = "_m"
 	gender = owner.gender == FEMALE ? "_f" : "_m"
 
-	if(appearance_test.simple_setup)
+	// EQUINOX EDIT START - furry
+	overlays.Cut()	//Clears out existing bodymarkings
+
+	if(!species && iscarbon(owner))	//Rearranging this up here for jank code reasons
+		species = owner.species
+
+	if(species.sprite_compatibility_mode && !BP_IS_ROBOTIC(src))
+		if(organ_tag == BP_CHEST)
+			icon_state = "torso[gender]"	//species that have the sprite_compatibility_mode var TRUE uses torso instead of chest for the iconstate.
+		else if((organ_tag in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)))	//species that have the sprite_compatibility_mode var TRUE don't have gendered limbs.
+			icon_state = "[organ_tag]"
+		else
+			icon_state = "[organ_tag][gender][is_stump()?"_s":""]"	//Only the head and groin should be affected by this.
+	else if(appearance_test.simple_setup)
 		icon_state = "[organ_tag][gender]"
 	else
 		icon_state = "[organ_tag][gender][is_stump()?"_s":""]"
 
-	if(!species && iscarbon(owner))
-		species = owner.species
+	// EQUINOX EDIT END - furry
 
 	if(!appearance_test.get_species_sprite)
 		icon = 'icons/mob/human_races/r_human.dmi'
@@ -132,6 +171,22 @@ var/global/list/limb_icon_cache = list()
 
 	mob_icon = new/icon(icon, icon_state)
 
+	// EQUINOX EDIT START - furry - species that have the sprite_compatibility_mode var TRUE have seperate hands and feet. This merges them in code due to avoid mucking with the dmi. Yes, this is laziness.
+	if((organ_tag in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM)) && (species.sprite_compatibility_mode) && (!BP_IS_ROBOTIC(src)))
+		var/icon/limb_splice
+
+		if(organ_tag == BP_L_LEG)
+			limb_splice = new/icon(icon, "l_foot")
+		else if(organ_tag == BP_R_LEG)
+			limb_splice = new/icon(icon, "r_foot")
+		else if(organ_tag == BP_L_ARM)
+			limb_splice = new/icon(icon, "l_hand")
+		else if(organ_tag == BP_R_ARM)
+			limb_splice = new/icon(icon, "r_hand")
+
+		mob_icon.Blend(limb_splice, ICON_OVERLAY)
+	// EQUINOX EDIT END - furry
+
 	if(appearance_test.colorize_organ)
 		if(status & ORGAN_DEAD)
 			mob_icon.ColorTone(rgb(10,50,0))
@@ -143,8 +198,36 @@ var/global/list/limb_icon_cache = list()
 				mob_icon.Blend(rgb(-skin_tone,  -skin_tone,  -skin_tone), ICON_SUBTRACT)
 		else
 			if(skin_col)
-				mob_icon.Blend(skin_col, ICON_ADD)
+				mob_icon.Blend(skin_col, ICON_MULTIPLY) //EQUINOX EDIT - furry
 
+	// EQUINOX EDIT START - furry - apply bodymarkings
+	if(!istype(src,/obj/item/organ/external/head))
+		for(var/M in markings)
+			var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+			var/icon/mark_s
+			var/icon/mark_splice
+
+			if(organ_tag == BP_CHEST)
+				mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-torso")
+			else
+				mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+
+			if(organ_tag == BP_L_LEG)
+				mark_splice = new/icon(mark_style.icon, "[mark_style.icon_state]-l_foot")
+			else if(organ_tag == BP_R_LEG)
+				mark_splice = new/icon(mark_style.icon, "[mark_style.icon_state]-r_foot")
+			else if(organ_tag == BP_L_ARM)
+				mark_splice = new/icon(mark_style.icon, "[mark_style.icon_state]-l_hand")
+			else if(organ_tag == BP_R_ARM)
+				mark_splice = new/icon(mark_style.icon, "[mark_style.icon_state]-r_hand")
+
+			if(mark_splice && mark_s)
+				mark_s.Blend(mark_splice, ICON_OVERLAY)
+
+			mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
+			add_overlay(mark_s) //So when it's not on your body, it has icons
+			mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
+	// EQUINOX EDIT END
 
 	dir = EAST
 	icon = mob_icon

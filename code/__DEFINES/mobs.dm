@@ -224,3 +224,38 @@
 #define CAN_OPERATE_ALL 1 //All possible surgery types are available
 #define CAN_OPERATE_STANDING -1 //Only limited surgery types are available (gouging out shrapnel, for instance)
 
+//EQUINOX EDIT START - furry
+#define SPECIES_UNATHI			"Unathi"
+#define SPECIES_SKRELL			"Skrell"
+#define SPECIES_TESHARI			"Teshari"
+#define SPECIES_TAJ				"Tajara"
+#define SPECIES_PROMETHEAN		"Promethean"
+#define SPECIES_DIONA			"Diona"
+#define SPECIES_VOX				"Vox"
+#define SPECIES_AKULA			"Shucan"
+#define SPECIES_ALRAUNE			"Alraune"
+#define SPECIES_NEVREAN			"Nevrean"
+#define SPECIES_PROTEAN			"Protean"
+#define SPECIES_RAPALA			"Rapala"
+#define SPECIES_SERGAL			"Sergal"
+#define SPECIES_VASILISSAN		"Vasilissan"
+#define SPECIES_VULPKANIN		"Vulpkanin"
+#define SPECIES_XENOCHIMERA		"Xenochimera"
+#define SPECIES_XENOHYBRID		"Xenomorph Hybrid"
+#define SPECIES_ZORREN_FLAT		"Flatland Zorren"
+#define SPECIES_ZORREN_HIGH		"Zorren"
+#define SPECIES_CUSTOM			"Custom Species"
+#define SPECIES_PHORONMAN		"Phoronoid"
+#define SPECIES_MOTH			"Mothperson"
+#define SPECIES_SLIMEPERSON		"Lesser Slimeperson"
+#define SPECIES_VATGROWN		"Vatgrown Human"
+
+#define PRONOUNS_BIOLOGICAL		"Biological"
+#define PRONOUNS_MALE			"He/Him"
+#define PRONOUNS_FEMALE			"She/Her"
+#define PRONOUNS_PLURAL			"They/Them"
+#define PRONOUNS_NEUTER			"It/Its"
+
+#define PRONOUNS_LIST			list(PRONOUNS_BIOLOGICAL, PRONOUNS_MALE, PRONOUNS_FEMALE, PRONOUNS_PLURAL, PRONOUNS_NEUTER)
+
+//EQUINOX EDIT END - furry

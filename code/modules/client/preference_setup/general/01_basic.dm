@@ -7,6 +7,7 @@
 	var/real_last_name
 	var/be_random_name = 0				//whether we are a random name every round
 	var/tts_seed = TTS_SEED_DEFAULT_MALE
+	var/pronouns = PRONOUNS_BIOLOGICAL	//EQUINOX EDIT - furry
 
 /datum/category_item/player_setup_item/physical/basic
 	name = "Basic"
@@ -14,6 +15,7 @@
 
 /datum/category_item/player_setup_item/physical/basic/load_character(savefile/S)
 	from_file(S["gender"],                pref.gender)
+	from_file(S["pronouns"],              pref.pronouns)
 	from_file(S["age"],                   pref.age)
 	from_file(S["spawnpoint"],            pref.spawnpoint)
 	from_file(S["real_first_name"],       pref.real_first_name)
@@ -24,6 +26,7 @@
 
 /datum/category_item/player_setup_item/physical/basic/save_character(savefile/S)
 	to_file(S["gender"],                  pref.gender)
+	to_file(S["pronouns"],                pref.pronouns)
 	to_file(S["age"],                     pref.age)
 	to_file(S["spawnpoint"],              pref.spawnpoint)
 	to_file(S["real_first_name"],         pref.real_first_name)
@@ -37,6 +40,7 @@
 	if(!S) S = all_species[SPECIES_HUMAN]
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
+	pref.pronouns			= sanitize_inlist(pref.pronouns, PRONOUNS_LIST, PRONOUNS_BIOLOGICAL)	//EQUINOX EDIT - furry
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, get_late_spawntypes(), initial(pref.spawnpoint))
 	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 
@@ -50,6 +54,7 @@
 	. += "<a href='?src=\ref[src];always_random_name=1'>Always Random Name: [pref.be_random_name ? "Yes" : "No"]</a>"
 	. += "<hr>"
 	. += "<b>Gender:</b> <a href='?src=\ref[src];gender=1'><b>[gender2text(pref.gender)]</b></a><br>"
+	. += "<b>Pronouns:</b> <a href='?src=\ref[src];pronouns=1'><b>[pref.pronouns]</b></a><br>"
 	. += "<b>Age:</b> <a href='?src=\ref[src];age=1'>[pref.age]</a><br>"
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a><br>"
 	. += "<b>Text-to-speech seed</b>: <a href='?src=\ref[src];tts_seed=1'>[pref.tts_seed]</a><br>"
@@ -119,6 +124,14 @@
 				seeds = tts_seeds
 			pref.tts_seed = pick(seeds)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+//EQUINOX EDIT START - furry
+	else if(href_list["pronouns"])
+		var/new_pronouns = input(user, "Choose your character's pronouns:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.pronouns) as null|anything in PRONOUNS_LIST
+		if(new_pronouns && CanUseTopic(user) && (new_pronouns in PRONOUNS_LIST))
+			pref.pronouns = new_pronouns
+		return TOPIC_REFRESH
+//EQUINOX EDIT END - furry
 
 	else if(href_list["age"])
 		var/new_age = input(user, "Choose your character's age:\n([S.min_age]-[S.max_age])", CHARACTER_PREFERENCE_INPUT_TITLE, pref.age) as num|null

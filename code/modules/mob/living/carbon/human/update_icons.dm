@@ -7,6 +7,7 @@
 var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_skin][b_skin]
 var/global/list/light_overlay_cache = list()
+var/global/list/wing_icon_cache = list()	//EQUINOX EDIT - furry
 
 	///////////////////////
 	//UPDATE_ICONS SYSTEM//
@@ -105,37 +106,44 @@ If you have any questions/constructive-comments/bugs-to-report/or have a massivl
 Please contact me on #coderbus IRC. ~Carn x
 */
 
+//EQUINOX EDIT START - furry
+
 //Human Overlays Indexes/////////
 #define MUTATIONS_LAYER		1
 #define DAMAGE_LAYER		2
 #define SURGERY_LAYER		3
 #define IMPLANTS_LAYER		4
-#define UNDERWEAR_LAYER 	5
-#define UNIFORM_LAYER		6
-#define ID_LAYER			7
-#define SHOES_LAYER			8
-#define GLOVES_LAYER		9
-#define BELT_LAYER			10
-#define SUIT_LAYER			11
-#define TAIL_LAYER			12		//bs12 specific. this hack is probably gonna come back to haunt me
-#define GLASSES_LAYER		13
-#define BELT_LAYER_ALT		14
-#define BACK_LAYER			15
-#define SUIT_STORE_LAYER	16
-#define HAIR_LAYER			17		//TODO: make part of head layer?
-#define L_EAR_LAYER			18
-#define R_EAR_LAYER			19
-#define FACEMASK_LAYER		20
-#define HEAD_LAYER			21
-#define COLLAR_LAYER		22
-#define HANDCUFF_LAYER		23
-#define LEGCUFF_LAYER		24
-#define L_HAND_LAYER		25
-#define R_HAND_LAYER		26
-#define FIRE_LAYER			27		//If you're on fire
-#define BLOCKING_LAYER		28
-#define TOTAL_LAYERS		28
+#define MARKINGS_LAYER		5
+#define UNDERWEAR_LAYER 	6
+#define UNIFORM_LAYER		7
+#define ID_LAYER			8
+#define SHOES_LAYER			9
+#define GLOVES_LAYER		10
+#define BELT_LAYER			11
+#define SUIT_LAYER			12
+#define TAIL_LAYER			13		//bs12 specific. this hack is probably gonna come back to haunt me
+#define GLASSES_LAYER		14
+#define BELT_LAYER_ALT		15
+#define BACK_LAYER			16
+#define SUIT_STORE_LAYER	17
+#define HAIR_LAYER			18
+#define WING_LAYER			19
+#define L_EAR_LAYER			20
+#define R_EAR_LAYER			21
+#define FACEMASK_LAYER		22
+#define HEAD_LAYER			23
+#define TAIL_LAYER_ALT		24
+#define COLLAR_LAYER		25
+#define HANDCUFF_LAYER		26
+#define LEGCUFF_LAYER		27
+#define L_HAND_LAYER		28
+#define R_HAND_LAYER		29
+#define FIRE_LAYER			30		//If you're on fire
+#define BLOCKING_LAYER		31
+#define TOTAL_LAYERS		31
 //////////////////////////////////
+
+//EQUINOX EDIT END - furry
 
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
@@ -308,9 +316,43 @@ var/global/list/damage_icon_parts = list()
 		//END CACHED ICON GENERATION.
 		stand_icon.Blend(base_icon,ICON_OVERLAY)
 
+//EQUINOX EDIT START - furry
+	update_tail_showing(0)
+	update_wing_showing()
+//EQUINOX EDIT END - furry
+
 	appearance_test.Log("EXIT update_body()")
 	if(update_icons)
 		update_icons()
+
+//EQUINOX EDIT START - furry
+/mob/living/carbon/human/proc/update_markings_showing(var/update_icons = 1)
+	if(QDESTROYING(src))
+		return
+
+	overlays_standing[MARKINGS_LAYER] = null
+
+	var/marking_image = get_marking_image()
+	if(marking_image)
+		overlays_standing[MARKINGS_LAYER] = marking_image
+		if(update_icons) update_icons()
+
+/mob/living/carbon/human/proc/get_marking_image()
+	if(!body_markings) return
+	var/mutable_appearance/marking_icon = new(null)
+	for(var/markname in body_markings)
+		var/datum/sprite_accessory/marking/real_marking = GLOB.body_marking_styles_list[markname]
+		var/icon/specific_marking_icon = new()
+		for(var/part in real_marking.body_parts)
+			var/valid = (part in organs_by_name) && organs_by_name[part] && (part in BP_BASE_PARTS)
+			if(valid && ("[real_marking.icon_state]-[part]" in icon_states(real_marking.icon)))
+				var/icon/specific_marking_subicon = icon(real_marking.icon, "[real_marking.icon_state]-[part]")
+				specific_marking_subicon.Blend(specific_marking_icon, ICON_OVERLAY)
+				specific_marking_icon = specific_marking_subicon
+		specific_marking_icon.Blend(body_markings[markname], real_marking.color_blend_mode) //This should be a colour.
+		marking_icon.add_overlay(specific_marking_icon)
+	return image(marking_icon)
+//EQUINOX EDIT END - furry
 
 //UNDERWEAR OVERLAY
 
@@ -365,6 +407,12 @@ var/global/list/damage_icon_parts = list()
 				hair_s.Blend(hair_color, ICON_ADD)
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
+
+//EQUINOX EDIT START - furry
+	var/icon/ears_s = get_ears_overlay()
+	if (ears_s)
+		face_standing.Blend(ears_s, ICON_OVERLAY)
+//EQUINOX EDIT END - furry
 
 	overlays_standing[HAIR_LAYER]	= image(face_standing)
 
@@ -878,6 +926,8 @@ var/global/list/damage_icon_parts = list()
 	else
 		overlays_standing[SUIT_LAYER]	= null
 		update_inv_shoes(0)
+		update_wing_showing()	//EQUINOX EDIT
+		update_tail_showing()	//EQUINOX EDIT
 
 	update_collar(0)
 
@@ -1210,6 +1260,182 @@ var/global/list/damage_icon_parts = list()
 		return 0
 	else
 		return 1
+
+//EQUINOX EDIT START - furry
+/mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
+	overlays_standing[TAIL_LAYER] = null
+	overlays_standing[TAIL_LAYER_ALT] = null	//OCCULUS EDIT: Readding alt tail stuff
+	var/standing = null
+
+	var/active_tail_layer = tail_alted ? TAIL_LAYER_ALT : TAIL_LAYER
+
+	var/image/vr_tail_image = get_tail_image()
+	if(vr_tail_image)
+		standing = vr_tail_image
+	else
+		var/species_tail = species.get_tail(src)
+		if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+			var/icon/tail_s = get_tail_icon()
+			standing = image(tail_s, icon_state = "[species_tail]_s")
+			animate_tail_reset(0)
+
+	overlays_standing[active_tail_layer] = standing
+	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/proc/get_tail_icon()
+	var/icon_key = "[species.race_key][skin_color]"
+	var/icon/tail_icon = tail_icon_cache[icon_key]
+	if(!tail_icon)
+		//generate a new one
+		var/species_tail_anim = species.get_tail_animation(src)
+		if(!species_tail_anim && species.icobase_tail) species_tail_anim = species.icobase //Eclipse Code Port - Allow override of file for non-animated tails
+		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
+		tail_icon = new/icon(species_tail_anim)
+		tail_icon.Blend(skin_color, species.color_mult ? ICON_MULTIPLY : ICON_ADD) // Eclipse Code Port edit
+		// The following will not work with animated tails.
+/*		var/use_species_tail = species.get_tail_hair(src)
+		if(use_species_tail)
+			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
+			hair_icon.Blend(hair_colour, ICON_ADD)
+			tail_icon.Blend(hair_icon, ICON_OVERLAY)*/
+		tail_icon_cache[icon_key] = tail_icon
+
+	return tail_icon
+
+
+/mob/living/carbon/human/proc/set_tail_state(var/t_state)
+	var/active_tail_layer = tail_alted ? TAIL_LAYER_ALT : TAIL_LAYER
+	var/image/tail_overlay = overlays_standing[active_tail_layer]
+
+	if(tail_overlay && species.get_tail_animation(src))
+		tail_overlay.icon_state = t_state
+		return tail_overlay
+	return null
+
+//Not really once, since BYOND can't do that.
+//Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
+/mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
+	var/t_state = "[species.get_tail(src)]_once"
+
+	var/active_tail_layer = tail_alted ? TAIL_LAYER_ALT : TAIL_LAYER
+	var/image/tail_overlay = overlays_standing[active_tail_layer]
+	if(tail_overlay && tail_overlay.icon_state == t_state)
+		return //let the existing animation finish
+
+	tail_overlay = set_tail_state(t_state)
+	if(tail_overlay)
+		spawn(20)
+			//check that the animation hasn't changed in the meantime
+			if(overlays_standing[active_tail_layer] == tail_overlay && tail_overlay.icon_state == t_state)
+				animate_tail_stop()
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
+	set_tail_state("[species.get_tail(src)]_slow[rand(0,9)]")
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
+	set_tail_state("[species.get_tail(src)]_loop[rand(0,9)]")
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
+	if(stat != DEAD)
+		set_tail_state("[species.get_tail(src)]_idle[rand(0,9)]")
+	else
+		set_tail_state("[species.get_tail(src)]_static")
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
+	set_tail_state("[species.get_tail(src)]_static")
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/update_wing_showing(var/update_icons=1)
+	if(QDESTROYING(src))
+		return
+
+	overlays_standing[WING_LAYER] = null
+
+	var/image/vr_wing_image = get_wing_image()
+
+	overlays_standing[WING_LAYER] = vr_wing_image
+	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/proc/get_ears_overlay()
+	if(ear_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
+		var/icon/ears_s = new/icon(ear_style.icon, ear_style.icon_state)
+		if(ear_style.do_colouration)
+			ears_s.Blend(ears_color, ear_style.color_blend_mode)
+		if(ear_style.extra_overlay)
+			var/icon/overlay = new/icon(ear_style.icon, ear_style.extra_overlay)
+			overlay.Blend(ears_color2, ear_style.color_blend_mode)
+			ears_s.Blend(overlay, ICON_OVERLAY)
+			qdel(overlay)
+		return ears_s
+	return null
+
+/mob/living/carbon/human/proc/get_tail_image()
+	//If you are FBP with tail style and didn't set a custom one
+/*	var/datum/robolimb/model = isSynthetic()
+	if(istype(model) && model.includes_tail && !tail_style)
+		var/icon/tail_s = new/icon("icon" = synthetic.icon, "icon_state" = "tail")
+		tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
+		return image(tail_s)*/
+
+	//If you have a custom tail selected
+	if(tail_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL && !istype(tail_style, /datum/sprite_accessory/tail/taur)))
+		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = wagging && tail_style.ani_state ? tail_style.ani_state : tail_style.icon_state)
+		if(tail_style.do_colouration)
+			tail_s.Blend(tail_color, tail_style.color_blend_mode)
+		if(tail_style.extra_overlay)
+			var/icon/overlay = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.extra_overlay)
+			if(wagging && tail_style.ani_state)
+				overlay = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.extra_overlay_w)
+				overlay.Blend(tail_color2, tail_style.color_blend_mode)
+				tail_s.Blend(overlay, ICON_OVERLAY)
+				qdel(overlay)
+			else
+				overlay.Blend(tail_color2, tail_style.color_blend_mode)
+				tail_s.Blend(overlay, ICON_OVERLAY)
+				qdel(overlay)
+
+		if(istype(tail_style, /datum/sprite_accessory/tail/taur))
+			//var/datum/sprite_accessory/tail/taur/taurtype = tail_style
+			/*if(taurtype.can_ride && !riding_datum)
+				riding_datum = new /datum/riding/taur(src)
+				verbs |= /mob/living/carbon/human/proc/taur_mount*/
+			return image(tail_s, "pixel_x" = -16)
+		else
+			return image(tail_s)
+	return null
+
+/mob/living/carbon/human/proc/get_wing_image()
+	if(QDESTROYING(src))
+		return
+
+	//If you are FBP with wing style and didn't set a custom one
+/*NESTOR - TODO	if(synthetic && synthetic.includes_wing && !wing_style)
+		var/icon/wing_s = new/icon("icon" = synthetic.icon, "icon_state" = "wing") //I dunno. If synths have some custom wing?
+		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
+		return image(wing_s)*/
+
+	//If you have custom wings selected
+	if(wing_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+		var/icon/wing_s = new/icon(wing_style.icon, flapping && wing_style.ani_state ? wing_style.ani_state : wing_style.icon_state)
+		if(wing_style.do_colouration)
+			wing_s.Blend(wing_color, wing_style.color_blend_mode)
+		return image(wing_s)
+
+//EQUINOX EDIT END - furry
 
 // Contained sprite defines
 #undef WORN_LHAND
