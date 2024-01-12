@@ -108,3 +108,28 @@
 	var/momentum_speed = 0 // The amount of run-up
 	var/momentum_dir = 0 // Direction of run-up
 	var/momentum_reduction_timer
+
+//EQUINOX EDIT START - furry
+	var/datum/sprite_accessory/ears/ear_style = null
+	var/ears_color = "#000000"		// Ear color.
+	var/ears_color2 = "#000000"	// Ear extra color.
+
+	var/datum/sprite_accessory/tail/tail_style = null
+	var/tail_color = "#000000"		// Tail/Taur color
+	var/tail_color2 = "#000000" 	// For extra overlay.
+
+	var/datum/sprite_accessory/wing/wing_style = null
+	var/wing_color = "#000000"		// Wing color
+
+	var/list/body_markings = list()
+
+	var/fuzzy = TRUE
+
+	var/custom_species
+
+	var/flapping = FALSE
+	var/wagging = FALSE
+
+	var/tail_alted = FALSE
+
+	var/pronouns = PRONOUNS_BIOLOGICAL

@@ -26,7 +26,21 @@
 
 	var/msg = "<span class='info'>*---------*\nThis is "
 
-	var/datum/gender/T = gender_datums[gender]
+	//EQUINOX EDIT START - furry
+	var/datum/gender/T
+	if(!pronouns || pronouns == PRONOUNS_BIOLOGICAL)
+		T = gender_datums[gender]
+	else
+		if(pronouns == PRONOUNS_MALE)
+			T = gender_datums[MALE]
+		else if(pronouns == PRONOUNS_FEMALE)
+			T = gender_datums[FEMALE]
+		else if(pronouns == PRONOUNS_NEUTER)
+			T = gender_datums[NEUTER]
+		else if(pronouns == PRONOUNS_PLURAL)
+			T = gender_datums[PLURAL]
+	//EQUINOX EDIT END - furry
+
 	if(skipjumpsuit && skipface) //big suits/masks/helmets make it hard to tell their gender
 		T = gender_datums[PLURAL]
 	else
@@ -38,6 +52,12 @@
 		CRASH("Gender datum was null; key was '[(skipjumpsuit && skipface) ? PLURAL : gender]'")
 
 	msg += "<EM>[src.name]</EM>"
+	//EQUINOX EDIT START - furry
+	if(custom_species)
+		msg += ", \a <b><font color='[species.flesh_color]'>[custom_species]</font></b>"
+	else
+		msg += ", \a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
+	//EQUINOX EDIT END - furry
 	msg += "!\n"
 
 	//uniform

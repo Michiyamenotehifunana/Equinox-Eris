@@ -195,6 +195,22 @@
 	character.h_style = h_style
 	character.f_style = f_style
 
+//EQUINOX EDIT START - furry
+	character.ear_style = GLOB.ear_styles_list[ear_style]
+	character.tail_style = GLOB.tail_styles_list[tail_style]
+	character.wing_style = GLOB.wing_styles_list[wing_style]
+
+	character.custom_species = custom_species
+	character.size_multiplier = size_multiplier
+	character.fuzzy = fuzzy
+
+	character.body_markings = body_markings
+
+	character.appearance_flags	-= fuzzy*PIXEL_SCALE
+
+	character.pronouns = pronouns
+//EQUINOX EDIT END - furry
+
 	// Build mob body from prefs
 	character.rebuild_organs(src)
 
@@ -202,6 +218,14 @@
 	character.hair_color = hair_color
 	character.facial_color = facial_color
 	character.skin_color = skin_color
+
+//EQUINOX EDIT START - furry
+	character.ears_color = ears_color
+	character.ears_color2 = ears_color2
+	character.tail_color = tail_color
+	character.tail_color2 = tail_color2
+	character.wing_color = wing_color
+//EQUINOX EDIT END - furry
 
 	character.s_tone = s_tone
 
@@ -219,6 +243,21 @@
 				UW.ForceEquipUnderwear(character, FALSE)
 		else
 			all_underwear -= underwear_category_name
+
+//EQUINOX EDIT START - furry
+	for(var/N in character.organs_by_name)
+		var/obj/item/organ/external/O = character.organs_by_name[N]
+		O.markings.Cut()
+
+	for(var/M in body_markings)
+		var/datum/sprite_accessory/marking/mark_datum = GLOB.body_marking_styles_list[M]
+		var/mark_color = "[body_markings[M]]"
+
+		for(var/BP in mark_datum.body_parts)
+			var/obj/item/organ/external/O = character.organs_by_name[BP]
+			if(O)
+				O.markings[M] = list("color" = mark_color, "datum" = mark_datum)
+//EQUINOX EDIT END - furry
 
 	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
