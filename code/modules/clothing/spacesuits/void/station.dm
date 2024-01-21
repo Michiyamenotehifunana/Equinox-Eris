@@ -473,7 +473,7 @@
 		rad = 50
 	)
 	siemens_coefficient = 0.35
-	species_restricted = list(SPECIES_HUMAN)
+	//species_restricted = list(SPECIES_HUMAN)	//EQUINOX EDIT - furry
 	light_overlay = "helmet_light"
 
 /obj/item/clothing/suit/space/void/NTvoid
@@ -495,7 +495,7 @@
 	siemens_coefficient = 0.35
 	breach_threshold = 10
 	resilience = 0.07
-	species_restricted = list(SPECIES_HUMAN)
+	//species_restricted = list(SPECIES_HUMAN)	//EQUINOX EDIT - furry
 	helmet = /obj/item/clothing/head/space/void/NTvoid
 	spawn_blacklisted = TRUE
 	slowdown = LIGHT_SLOWDOWN

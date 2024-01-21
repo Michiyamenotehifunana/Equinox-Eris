@@ -13,7 +13,7 @@
 	)
 	siemens_coefficient = 0.35
 	max_heat_protection_temperature = 15000 //Halfway between Space Suit 5000 and Firesuit 30000
-	species_restricted = list(SPECIES_HUMAN)
+	//species_restricted = list(SPECIES_HUMAN)	//EQUINOX EDIT - furry
 	camera_networks = list(NETWORK_MERCENARY)
 	light_overlay = "helmet_light_green"
 
@@ -35,7 +35,7 @@
 	max_heat_protection_temperature = 15000 //Halfway between Space Suit 5000 and Firesuit 30000
 	breach_threshold = 10
 	resilience = 0.07
-	species_restricted = list(SPECIES_HUMAN)
+	//species_restricted = list(SPECIES_HUMAN)	//EQUINOX EDIT - furry
 	supporting_limbs = list()
 	helmet = /obj/item/clothing/head/space/void/SCAF
 	spawn_blacklisted = TRUE
@@ -57,7 +57,7 @@
 		rad = 75
 	)
 	siemens_coefficient = 0.35
-	species_restricted = list(SPECIES_HUMAN)
+	//species_restricted = list(SPECIES_HUMAN)	//EQUINOX EDIT - furry
 	camera_networks = list(NETWORK_MERCENARY)
 	light_overlay = "helmet_light_ihs"
 
@@ -85,7 +85,7 @@
 	siemens_coefficient = 0.35
 	breach_threshold = 8
 	resilience = 0.08
-	species_restricted = list(SPECIES_HUMAN)
+	//species_restricted = list(SPECIES_HUMAN)	//EQUINOX EDIT - furry
 	helmet = /obj/item/clothing/head/space/void/merc
 
 /obj/item/clothing/suit/space/void/merc/equipped
