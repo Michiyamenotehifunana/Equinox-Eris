@@ -195,6 +195,8 @@
 	max_age = 80
 
 /datum/species/unathi
+	name = SPECIES_UNATHI
+	name_plural = "Unathi"
 	spawn_flags = CAN_JOIN //CAN_JOIN is the only spawn flag all the races get, so that none of them will be whitelist only if whitelist is enabled.
 	icobase = 'z_modular_equinox/icons/mob/human_races/r_lizard_vr.dmi'
 	deform = 'z_modular_equinox/icons/mob/human_races/r_def_lizard_vr.dmi'
