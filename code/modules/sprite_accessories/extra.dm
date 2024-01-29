@@ -511,7 +511,7 @@
 
 /datum/sprite_accessory/facial_hair
 	icon = 'z_modular_equinox/icons/mob/human_face_or_vr.dmi'
-	var/color_blend_mode = ICON_MULTIPLY
+	blend = ICON_MULTIPLY
 	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE) //This lets all races use the facial hair styles.
 
 	shaved
@@ -590,7 +590,7 @@
 	desc = ""
 	icon = 'z_modular_equinox/icons/mob/human_face_vr.dmi'
 	icon_state = "inkling-colorable"
-	color_blend_mode = ICON_MULTIPLY
+	blend = ICON_MULTIPLY
 	do_colouration = 1
 
 
@@ -601,7 +601,7 @@
 //Reminder: BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_GROIN,BP_HEAD
 
 /datum/sprite_accessory/marking //Override for base markings
-	var/color_blend_mode = ICON_ADD
+	blend = ICON_MULTIPLY
 
 /datum/sprite_accessory/marking/vr
 	icon = 'z_modular_equinox/icons/mob/markings_vr.dmi'
@@ -609,62 +609,62 @@
 	vulp_belly
 		name = "belly fur (Vulp)"
 		icon_state = "vulp_belly"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_GROIN)
 
 	vulp_fullbelly
 		name = "full belly fur (Vulp)"
 		icon_state = "vulp_fullbelly"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_GROIN)
 
 	vulp_crest
 		name = "belly crest (Vulp)"
 		icon_state = "vulp_crest"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_GROIN)
 
 	vulp_nose
 		name = "nose (Vulp)"
 		icon_state = "vulp_nose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	snoutstripe
 		name = "snout stripe (Vulp)"
 		icon_state = "snoutstripe"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	vulp_face
 		name = "face (Vulp)"
 		icon_state = "vulp_face"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	vulp_earsface
 		name = "ears and face (Vulp)"
 		icon_state = "vulp_earsface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	vulp_all
 		name = "all head highlights (Vulp)"
 		icon_state = "vulp_all"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	sergal_full
 		name = "Sergal Markings"
 		icon_state = "sergal_full"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST,BP_HEAD)
 		species_allowed = list("Sergal")
 
 	sergal_full_female
 		name = "Sergal Markings (Female)"
 		icon_state = "sergal_full_female"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST,BP_HEAD)
 		species_allowed = list("Sergal")
 
@@ -686,21 +686,21 @@
 	brows
 		name = "Eyebrows"
 		icon_state = "brows"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	nevrean_female
 		name = "Female Nevrean beak"
 		icon_state = "nevrean_f"
 		body_parts = list(BP_HEAD)
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		gender = FEMALE
 
 	nevrean_male
 		name = "Male Nevrean beak"
 		icon_state = "nevrean_m"
 		body_parts = list(BP_HEAD)
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		gender = MALE
 
 	spots
@@ -711,7 +711,7 @@
 	shaggy_mane
 		name = "Shaggy mane/feathers"
 		icon_state = "shaggy"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST)
 
 	jagged_teeth
@@ -722,7 +722,7 @@
 	blank_face
 		name = "Blank round face (use with monster mouth)"
 		icon_state = "blankface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	monster_mouth
@@ -748,203 +748,203 @@
 	otie_face
 		name = "Otie face"
 		icon_state = "otieface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	otie_nose
 		name = "Otie nose"
 		icon_state = "otie_nose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	otienose_lite
 		name = "Short otie nose"
 		icon_state = "otienose_lite"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	backstripes
 		name = "Back stripes"
 		icon_state = "otiestripes"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_HEAD)
 
 	belly_butt
 		name = "Belly and butt"
 		icon_state = "bellyandbutt"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_GROIN,BP_CHEST)
 
 	fingers_toes
 		name = "Fingers and toes"
 		icon_state = "fingerstoes"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM)
 
 	otie_socks
 		name = "Fingerless socks"
 		icon_state = "otiesocks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM)
 
 	corvid_beak
 		name = "Corvid beak"
 		icon_state = "corvidbeak"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	corvid_belly
 		name = "Corvid belly"
 		icon_state = "corvidbelly"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_GROIN,BP_CHEST,BP_HEAD)
 
 	cow_body
 		name = "Cow markings"
 		icon_state = "cowbody"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST,BP_HEAD)
 
 	cow_nose
 		name = "Cow nose"
 		icon_state = "cownose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	zmask
 		name = "Eye mask"
 		icon_state = "zmask"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	zbody
 		name = "Thick jagged stripes"
 		icon_state = "zbody"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_GROIN,BP_CHEST)
 
 	znose
 		name = "Jagged snout"
 		icon_state = "znose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	otter_nose
 		name = "Otter nose"
 		icon_state = "otternose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	otter_face
 		name = "Otter face"
 		icon_state = "otterface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	deer_face
 		name = "Deer face"
 		icon_state = "deerface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	sharkface
 		name = "Akula snout"
 		icon_state = "sharkface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	sheppy_face
 		name = "Shepherd snout"
 		icon_state = "shepface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	sheppy_back
 		name = "Shepherd back"
 		icon_state = "shepback"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_GROIN)
 
 	zorren_belly_male
 		name = "Zorren Male Torso"
 		icon_state = "zorren_belly"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_GROIN)
 
 	zorren_belly_female
 		name = "Zorren Female Torso"
 		icon_state = "zorren_belly_female"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST,BP_GROIN)
 
 	zorren_back_patch
 		name = "Zorren Back Patch"
 		icon_state = "zorren_backpatch"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST)
 
 	zorren_face_male
 		name = "Zorren Male Face"
 		icon_state = "zorren_face"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 		gender = MALE
 
 	zorren_face_female
 		name = "Zorren Female Face"
 		icon_state = "zorren_face_female"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 		gender = FEMALE
 
 	zorren_muzzle_male
 		name = "Zorren Male Muzzle"
 		icon_state = "zorren_muzzle"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 		gender = MALE
 
 	zorren_muzzle_female
 		name = "Zorren Female Muzzle"
 		icon_state = "zorren_muzzle_female"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 		gender = FEMALE
 
 	zorren_socks
 		name = "Zorren Socks"
 		icon_state = "zorren_socks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM)
 
 	zorren_longsocks
 		name = "Zorren Longsocks"
 		icon_state = "zorren_longsocks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM)
 
 	tesh_feathers
 		name = "Teshari Feathers"
 		icon_state = "tesh-feathers"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM)
 
 	harpy_feathers
 		name = "Rapala leg Feather"
 		icon_state = "harpy-feathers"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG)
 
 	harpy_legs
 		name = "Rapala leg coloring"
 		icon_state = "harpy-leg"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG)
 
 	chooves
 		name = "Cloven hooves"
 		icon_state = "chooves"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG)
 
 	alurane
@@ -961,37 +961,37 @@
 	gloss
 		name = "Full body gloss"
 		icon_state = "gloss"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST,BP_HEAD)
 
 	eboop_panels
 		name = "Eggnerd FBP panels"
 		icon_state = "eboop"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST,BP_HEAD)
 
 	osocks_rarm
 		name = "Modular Longsock (right arm)"
 		icon_state = "osocks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_R_ARM,BP_R_ARM)
 
 	osocks_larm
 		name = "Modular Longsock (left arm)"
 		icon_state = "osocks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_ARM,BP_L_ARM)
 
 	osocks_rleg
 		name = "Modular Longsock (right leg)"
 		icon_state = "osocks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_R_LEG,BP_R_LEG)
 
 	osocks_lleg
 		name = "Modular Longsock (left leg)"
 		icon_state = "osocks"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_L_LEG)
 
 	animeeyesinner
@@ -1013,73 +1013,73 @@
 	catwomantorso
 		name = "Catwoman chest stripes"
 		icon_state = "catwomanchest"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST)
 
 	catwomangroin
 		name = "Catwoman groin stripes"
 		icon_state = "catwomangroin"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_GROIN)
 
 	catwoman_rleg
 		name = "Catwoman right leg stripes"
 		icon_state = "catwomanright"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_R_LEG)
 
 	catwoman_lleg
 		name = "Catwoman left leg stripes"
 		icon_state = "catwomanleft"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG)
 
 	teshi_fluff
 		name = "Teshari underfluff"
 		icon_state = "teshi_fluff"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_GROIN,BP_CHEST,BP_HEAD)
 
 	teshi_small_feathers
 		name = "Teshari small wingfeathers"
 		icon_state = "teshi_sf"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_CHEST)
 
 	spirit_lights
 		name = "Ward - Spirit FBP Lights"
 		icon_state = "lights"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_HEAD)
 
 	spirit_lights_body
 		name = "Ward - Spirit FBP Lights (body)"
 		icon_state = "lights"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_CHEST)
 
 	spirit_lights_head
 		name = "Ward - Spirit FBP Lights (head)"
 		icon_state = "lights"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	spirit_panels
 		name = "Ward - Spirit FBP Panels"
 		icon_state = "panels"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST,BP_HEAD)
 
 	spirit_panels_body
 		name = "Ward - Spirit FBP Panels (body)"
 		icon_state = "panels"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_GROIN,BP_CHEST)
 
 	spirit_panels_head
 		name = "Ward - Spirit FBP Panels (head)"
 		icon_state = "panels"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_CHEST)
 
@@ -1092,31 +1092,31 @@
 	genfullhead
 		name = "Full Head Coloring"
 		icon_state = "fullhead"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	genfullface
 		name = "Face Coloring"
 		icon_state = "fullface"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	genfade
 		name = "Neck Fade (For Head Coloring)"
 		icon_state = "genfade"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_CHEST)
 
 	genbeak
 		name = "Generic Beak"
 		icon_state = "genbeak"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	genshortbeak
 		name = "Short Beak"
 		icon_state = "shortbeak"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	frog_head
@@ -1132,41 +1132,41 @@
 	equine_snout //Why the long face? Works best with sergal bodytype.
 		name = "Equine Snout"
 		icon_state = "donkey"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	equine_nose
 		name = "Equine Nose"
 		icon_state = "dnose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	vulp_short_nose
 		name = "nose, short (Vulp)"
 		icon_state = "vulp_short_nose"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	vulp_facealt
 		name = "face, alt. (Vulp)"
 		icon_state = "vulp_facealt"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	taj_nose_alt
 		name = "Nose Color, alt. (Taj)"
 		icon_state = "taj_nosealt"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_HEAD)
 
 	talons
 		name = "Talons"
 		icon_state = "talons"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG)
 
 	claws
 		name = "Claws"
 		icon_state = "claws"
-		color_blend_mode = ICON_MULTIPLY
+		blend = ICON_MULTIPLY
 		body_parts = list(BP_L_ARM,BP_R_ARM)

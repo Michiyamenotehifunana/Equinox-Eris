@@ -3,13 +3,10 @@
 //body markings
 /datum/sprite_accessory/marking
 	icon = 'z_modular_equinox/icons/mob/markings.dmi'
-	do_colouration = 1 //Almost all of them have it, COLOR_ADD
-	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
-	//like IPC optics overlay stuff.
-	species_allowed = null
-	var/layer_blend = ICON_OVERLAY
+	do_colouration = TRUE //COLOR_ADD by default, use the blend var to change it.
+	species_allowed = null	//Empty list is unrestricted.
 	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
-	//Reminder: BP_L_LEG,BP_R_LEG,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_ARM,BP_R_ARM,BP_CHEST,BP_GROIN,BP_HEAD
+	//Reminder: BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM, BP_CHEST, BP_GROIN, BP_HEAD
 	var/draw_target
 
 /datum/sprite_accessory/marking/tat_hive

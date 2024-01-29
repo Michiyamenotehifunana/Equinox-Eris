@@ -124,7 +124,7 @@
 	name = "You should not see this..."
 	icon = 'z_modular_equinox/icons/mob/taurs_vr.dmi'
 	do_colouration = 1 // Yes color, using tail color
-	color_blend_mode = ICON_MULTIPLY  // The sprites for taurs are designed for ICON_MULTIPLY
+	blend = ICON_MULTIPLY  // The sprites for taurs are designed for ICON_MULTIPLY
 
 	var/icon/suit_sprites = null //File for suit sprites, if any.
 

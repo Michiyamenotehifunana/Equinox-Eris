@@ -2690,6 +2690,7 @@
 #include "code\modules\shuttles\shuttle_specops.dm"
 #include "code\modules\shuttles\shuttle_supply.dm"
 #include "code\modules\shuttles\shuttles_multi.dm"
+#include "code\modules\sprite_accessories\_accesory_hair_fade.dm"
 #include "code\modules\sprite_accessories\_accessory.dm"
 #include "code\modules\sprite_accessories\_accessory_facial.dm"
 #include "code\modules\sprite_accessories\_accessory_hair.dm"

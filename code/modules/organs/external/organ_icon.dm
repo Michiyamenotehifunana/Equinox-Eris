@@ -114,7 +114,7 @@ var/global/list/limb_icon_cache = list()
 						if(mark_style.draw_target == 1)
 							var/icon/mark_s = new/icon(mark_style.icon, mark_style.icon_state)
 							mark_s.Blend(hair, ICON_AND)
-							mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
+							mark_s.Blend(markings[M]["color"], mark_style.blend)
 							hair.Blend(mark_s, ICON_OVERLAY)
 					// EQUINOX EDIT END - Hair Color Gradients
 				overlays |= hair
@@ -124,7 +124,7 @@ var/global/list/limb_icon_cache = list()
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
 		if(!mark_style.draw_target)
 			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
+			mark_s.Blend(markings[M]["color"], mark_style.blend)
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 	// EQUINOX EDIT END /////
@@ -224,7 +224,7 @@ var/global/list/limb_icon_cache = list()
 			if(mark_splice && mark_s)
 				mark_s.Blend(mark_splice, ICON_OVERLAY)
 
-			mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
+			mark_s.Blend(markings[M]["color"], mark_style.blend)
 			add_overlay(mark_s) //So when it's not on your body, it has icons
 			mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 	// EQUINOX EDIT END

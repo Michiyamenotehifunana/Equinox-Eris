@@ -349,7 +349,7 @@ var/global/list/damage_icon_parts = list()
 				var/icon/specific_marking_subicon = icon(real_marking.icon, "[real_marking.icon_state]-[part]")
 				specific_marking_subicon.Blend(specific_marking_icon, ICON_OVERLAY)
 				specific_marking_icon = specific_marking_subicon
-		specific_marking_icon.Blend(body_markings[markname], real_marking.color_blend_mode) //This should be a colour.
+		specific_marking_icon.Blend(body_markings[markname], real_marking.blend) //This should be a colour.
 		marking_icon.add_overlay(specific_marking_icon)
 	return image(marking_icon)
 //EQUINOX EDIT END - furry
@@ -405,6 +405,15 @@ var/global/list/damage_icon_parts = list()
 			var/icon/hair_s = new/icon(hair_style.icon, hair_style.icon_state)
 			if(hair_style.do_colouration)
 				hair_s.Blend(hair_color, ICON_ADD)
+			// EQUINOX EDIT START - Hair Color Gradients
+				for(var/M in head_organ.markings)
+					var/datum/sprite_accessory/marking/mark_style = head_organ.markings[M]["datum"]
+					if(mark_style.draw_target == 1)
+						var/icon/mark_s = new/icon(mark_style.icon, mark_style.icon_state)
+						mark_s.Blend(hair_s, ICON_AND)
+						mark_s.Blend(head_organ.markings[M]["color"], mark_style.blend)
+						hair_s.Blend(mark_s, ICON_OVERLAY)
+			// EQUINOX EDIT END - Hair Color Gradients
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
@@ -1374,10 +1383,10 @@ var/global/list/damage_icon_parts = list()
 	if(ear_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
 		var/icon/ears_s = new/icon(ear_style.icon, ear_style.icon_state)
 		if(ear_style.do_colouration)
-			ears_s.Blend(ears_color, ear_style.color_blend_mode)
+			ears_s.Blend(ears_color, ear_style.blend)
 		if(ear_style.extra_overlay)
 			var/icon/overlay = new/icon(ear_style.icon, ear_style.extra_overlay)
-			overlay.Blend(ears_color2, ear_style.color_blend_mode)
+			overlay.Blend(ears_color2, ear_style.blend)
 			ears_s.Blend(overlay, ICON_OVERLAY)
 			qdel(overlay)
 		return ears_s
@@ -1395,16 +1404,16 @@ var/global/list/damage_icon_parts = list()
 	if(tail_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL && !istype(tail_style, /datum/sprite_accessory/tail/taur)))
 		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = wagging && tail_style.ani_state ? tail_style.ani_state : tail_style.icon_state)
 		if(tail_style.do_colouration)
-			tail_s.Blend(tail_color, tail_style.color_blend_mode)
+			tail_s.Blend(tail_color, tail_style.blend)
 		if(tail_style.extra_overlay)
 			var/icon/overlay = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.extra_overlay)
 			if(wagging && tail_style.ani_state)
 				overlay = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.extra_overlay_w)
-				overlay.Blend(tail_color2, tail_style.color_blend_mode)
+				overlay.Blend(tail_color2, tail_style.blend)
 				tail_s.Blend(overlay, ICON_OVERLAY)
 				qdel(overlay)
 			else
-				overlay.Blend(tail_color2, tail_style.color_blend_mode)
+				overlay.Blend(tail_color2, tail_style.blend)
 				tail_s.Blend(overlay, ICON_OVERLAY)
 				qdel(overlay)
 
@@ -1432,7 +1441,7 @@ var/global/list/damage_icon_parts = list()
 	if(wing_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
 		var/icon/wing_s = new/icon(wing_style.icon, flapping && wing_style.ani_state ? wing_style.ani_state : wing_style.icon_state)
 		if(wing_style.do_colouration)
-			wing_s.Blend(wing_color, wing_style.color_blend_mode)
+			wing_s.Blend(wing_color, wing_style.blend)
 		return image(wing_s)
 
 //EQUINOX EDIT END - furry
