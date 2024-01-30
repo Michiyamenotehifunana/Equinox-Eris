@@ -2696,6 +2696,7 @@
 #include "code\modules\sprite_accessories\_accessory_hair.dm"
 #include "code\modules\sprite_accessories\_accessory_markings.dm"
 #include "code\modules\sprite_accessories\extra.dm"
+#include "code\modules\sprite_accessories\sprite_accesories_equinox.dm"
 #include "code\modules\sprite_accessories\sprite_accessories_taur_vr.dm"
 #include "code\modules\sprite_accessories\sprite_accessories_vr.dm"
 #include "code\modules\stashes\stash_datum.dm"
