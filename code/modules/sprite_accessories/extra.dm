@@ -510,7 +510,7 @@
 		gender = NEUTER
 
 /datum/sprite_accessory/facial_hair
-	icon = 'z_modular_equinox/icons/mob/human_face_or_vr.dmi'
+//	icon = 'z_modular_equinox/icons/mob/human_face_or_vr.dmi'
 	blend = ICON_MULTIPLY
 	species_allowed = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_NEVREAN, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_ZORREN_FLAT, SPECIES_ZORREN_HIGH, SPECIES_VULPKANIN, SPECIES_XENOCHIMERA, SPECIES_XENOHYBRID, SPECIES_VASILISSAN, SPECIES_RAPALA, SPECIES_PROTEAN, SPECIES_ALRAUNE) //This lets all races use the facial hair styles.
 
