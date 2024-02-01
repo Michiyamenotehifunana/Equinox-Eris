@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(active_mind_fryers)
 		break
 
 /obj/item/device/mind_fryer/proc/reg_break(mob/living/carbon/human/victim)
-	if(victim.get_species() != SPECIES_HUMAN)
+	if(!(victim.get_species() in playable_species))	//EQUINOX EDIT - furry
 		return
 
 	if(owner && owner.current)
