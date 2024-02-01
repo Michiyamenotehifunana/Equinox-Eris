@@ -198,7 +198,7 @@
 		icon_state = "m_frills_aqua"
 		species_allowed = list(SPECIES_UNATHI, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
 		blend = ICON_MULTIPLY
-
+/*
 	taj_ears
 		name = "Tajaran Ears"
 		icon = 'icons/mob/human_face.dmi'
@@ -269,7 +269,8 @@
 		name = "Tajara Messy"
 		icon = 'icons/mob/human_face.dmi'
 		icon_state = "hair_messy"
-		species_allowed = list(SPECIES_TAJ, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)		// End Eclipse edit.
+		species_allowed = list(SPECIES_TAJ, SPECIES_XENOCHIMERA, SPECIES_PROTEAN)
+*/
 
 	teshari_fluffymohawk
 		name = "Teshari Fluffy Mohawk"

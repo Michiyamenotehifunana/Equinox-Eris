@@ -388,7 +388,7 @@
 /datum/sprite_accessory/ears/soghun_longspines 		// Begin Eclipse edit.
 	name = "Unathi Long Spines"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "soghun_longspines"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -396,7 +396,7 @@
 /datum/sprite_accessory/ears/soghun_shortspines
 	name = "Unathi Short Spines"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "soghun_shortspines"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -404,7 +404,7 @@
 /datum/sprite_accessory/ears/soghun_horns
 	name = "Unathi Horns"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "soghun_horns"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -420,7 +420,7 @@
 /datum/sprite_accessory/ears/unathi_bighorn
 	name = "Unathi Horns Big"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "unathi_bighorn"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -428,7 +428,7 @@
 /datum/sprite_accessory/ears/unathi_smallhorn
 	name = "Unathi Horns Small"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "unathi_smallhorn"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -436,7 +436,7 @@
 /datum/sprite_accessory/ears/unathi_ramhorn
 	name = "Unathi Ram Horns"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "unathi_ramhorn"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -444,7 +444,7 @@
 /datum/sprite_accessory/ears/unathi_curved_ramhorn
 	name = "Unathi Curved Ram Horns"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "unathi_curved_ramhorn"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -452,7 +452,7 @@
 /datum/sprite_accessory/ears/facial_hornadorns
 	name = "Unathi Horn Adorns"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "facial_hornadorns"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -460,7 +460,7 @@
 /datum/sprite_accessory/ears/facial_spikes
 	name = "Unathi Spikes"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "facial_spikes"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -468,7 +468,7 @@
 /datum/sprite_accessory/ears/facial_chinhorns
 	name = "Unathi Chin Horns"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "facial_chinhorns"
 	do_colouration = 1
 	blend = ICON_ADD
@@ -476,7 +476,7 @@
 /datum/sprite_accessory/ears/facial_dorsalfrill
 	name = "Unathi Dorsal Frill"
 	desc = ""
-	icon = "icons/mob/unathi_extras.dmi"
+	icon = 'z_modular_equinox/icons/mob/unathi_extras.dmi'
 	icon_state = "facial_dorsalfrill"
 	do_colouration = 1
 	blend = ICON_ADD 		// End Eclipse edit.
